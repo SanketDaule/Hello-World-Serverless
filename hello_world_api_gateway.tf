@@ -35,3 +35,11 @@ resource "aws_api_gateway_integration" "proxy" {
 
 }
 
+# Deploying the API
+resource "aws_api_gateway_deployment" "dev_deployment" {
+  depends_on = [aws_api_gateway_integration.proxy]
+
+  rest_api_id = aws_api_gateway_rest_api.hello_world_api.id
+  stage_name  = "DEV"
+}
+
